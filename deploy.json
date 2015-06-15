@@ -16,5 +16,5 @@
     "npm install",
     "npm build"
   ],
-  "run_cmd": "FOREVER_ROOT='/web/simple-faye-server/current' forever start -l log/forever.log -o log/out.log -e log/err.log server.js"
+  "run_cmd": "FOREVER_ROOT='/web/simple-faye-server/current' forever start  -o log/out.log -e log/err.log server.js"
 }
