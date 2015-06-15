@@ -8,11 +8,13 @@
   "force_regenerate_git_dir": false,
   "shared_dirs": [
     "node_modules",
-    "db"
+    "db",
+    "log"
   ],
   "prerun": [
+    "forever stop server.js",
     "npm install",
     "npm build"
   ],
-  "run_cmd": "npm start"
+  "run_cmd": "forever start -l log/forever.log -o log/out.log -e log/err.log server.js"
 }
