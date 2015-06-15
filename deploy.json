@@ -1,0 +1,17 @@
+{
+  "server": "106.186.119.248",
+  "port": 22,
+  "server_dir": "/web/simple-faye-server",
+  "repo": "git://github.com/mindpin/simple-faye-server.git",
+  "prj_git_relative_dir": "",
+  "branch": "master",
+  "force_regenerate_git_dir": false,
+  "shared_dirs": [
+    "node_modules",
+    "db"
+  ],
+  "prerun": [
+    "npm build"
+  ],
+  "run_cmd": "npm start"
+}

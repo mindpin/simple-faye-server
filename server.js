@@ -43,5 +43,5 @@ bayeux.on('disconnect', function(clientId) {
 
 var server = http.createServer();
 bayeux.attach(server);
-server.listen(8000);
-console.log("faye server is listening http://127.0.0.1:8000");
+server.listen(9527);
+console.log("faye server is listening http://127.0.0.1:9527");
