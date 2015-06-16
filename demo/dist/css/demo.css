@@ -1,0 +1,56 @@
+body {
+  background-color: #c1c1c1;
+  font-family: 'microsoft yahei',Arial,sans-serif; }
+
+.message-list {
+  border-top: 3px solid #337ab7;
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.175) ;
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.175) ;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.175) ;
+  background-color: #fff;
+  margin-top: 100px;
+  height: 500px;
+  padding: 15px 30px; }
+  .message-list ul {
+    overflow: scroll;
+    -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.175) inset;
+    -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.175) inset;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.175) inset;
+    list-style: none;
+    background-color: #fff;
+    height: 470px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+    padding: 15px; }
+    .message-list ul li {
+      margin-top: 20px; }
+      .message-list ul li .message {
+        -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.175) ;
+        -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.175) ;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.175) ;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        border-radius: 2px;
+        padding: 5px 15px;
+        background: #f1f1f1;
+        display: inline; }
+      .message-list ul li.other .message {
+        float: left; }
+      .message-list ul li.self .username {
+        float: right; }
+      .message-list ul li.self .message {
+        clear: both;
+        float: right;
+        background: #7dc0f9; }
+
+.message-input {
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.175) ;
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.175) ;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.175) ;
+  background-color: #fff;
+  margin-top: 15px;
+  border-top: 3px solid #337ab7;
+  padding: 15px; }

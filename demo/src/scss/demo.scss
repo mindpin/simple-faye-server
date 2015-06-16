@@ -1,0 +1,74 @@
+@mixin box-shadow($top, $left, $blur, $color, $inset:"") {
+  -webkit-box-shadow:$top $left $blur $color #{$inset};
+  -moz-box-shadow:$top $left $blur $color #{$inset};
+  box-shadow:$top $left $blur $color #{$inset};
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+body{
+  background-color: #c1c1c1;
+  font-family: 'microsoft yahei',Arial,sans-serif;
+}
+.message-list{
+  border-top: 3px solid #337ab7;
+  @include box-shadow(1px, 1px, 1px, rgba(0, 0, 0, 0.175));
+  background-color: #fff;
+  margin-top: 100px;
+  height: 500px;
+  padding: 15px 30px;
+
+
+  ul{
+    overflow: scroll;
+    @include box-shadow(1px, 1px, 1px, rgba(0, 0, 0, 0.175), inset);
+    list-style: none;
+    background-color: #fff;
+    height: 470px;
+    @include border-radius(10px);
+    padding: 15px;
+
+    li{
+      margin-top: 20px;
+      .message{
+        @include box-shadow(2px, 2px, 2px, rgba(0, 0, 0, 0.175));
+        @include border-radius(2px);
+        padding: 5px 15px;
+        background: #f1f1f1;
+        display: inline;
+      }
+
+
+      &.other{
+        .message{
+          float: left;
+        }
+      }
+
+      &.self{
+        .username{
+          float: right;
+        }
+        .message{
+          clear: both;
+          float: right;
+          background: #7dc0f9;
+        }
+      }
+
+    }
+  }
+}
+
+.message-input{
+  @include box-shadow(1px, 1px, 1px, rgba(0, 0, 0, 0.175));
+  background-color: #fff;
+  margin-top: 15px;
+  border-top: 3px solid #337ab7;
+  padding: 15px;
+}

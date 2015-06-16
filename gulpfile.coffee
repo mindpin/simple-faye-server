@@ -23,6 +23,7 @@ options =
   scss2css:
     src:
       scss: "demo/src/scss"
+      scss_file: "demo/src/scss/*.scss"
     dist:
       css: "demo/dist/css"
   css2css:
@@ -65,5 +66,5 @@ gulp.task "build", ["coffee2js", "haml2html", "scss2css", "css2css"]
 gulp.task 'watch', ['build'], ->
   gulp.watch options.coffee2js.src.coffee, ['coffee2js']
   gulp.watch options.haml2html.src.haml, ['haml2html']
-  gulp.watch options.scss2css.src.scss, ['scss2css']
+  gulp.watch options.scss2css.src.scss_file, ['scss2css']
   gulp.watch options.css2css.src.css, ['css2css']

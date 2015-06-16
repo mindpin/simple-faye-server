@@ -6,11 +6,32 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
     %title faye demo
     %link{:rel=>"stylesheet", :href => "http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"}
+    %script{:src => "http://cdn.gbtags.com/jquery/2.1.1/jquery.min.js"}
+    %script{:src => "http://faye.4ye.me:9527/faye/client.js"}
     / HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
     / WARNING: Respond.js doesn't work if you view the page via file://
     /[if lt IE 9]
       %script{:src => "http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"}
       %script{:src => "http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"}
 
+    %link{:rel=>"stylesheet", :href => "./css/demo.css"}
+    %script{:src => "./js/demo.js"}
+
   %body
-    faye demo1
+    .container
+      .row
+        .col-md-10.col-md-offset-1
+          .message-list
+            .row
+              %ul.col-md-12
+
+
+      .row
+        .col-md-10.col-md-offset-1
+          .message-input
+            .form-horizontal
+              .form-group
+                .col-md-10
+                  %input.form-control{:name => "message", :type => "text"}
+                .col-md-2
+                  %button.send.btn.btn-primary.btn-block{:type => "submit"} 发送
