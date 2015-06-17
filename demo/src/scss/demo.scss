@@ -1,7 +1,8 @@
 @mixin box-shadow($top, $left, $blur, $color, $inset:"") {
   -webkit-box-shadow:$top $left $blur $color #{$inset};
-  -moz-box-shadow:$top $left $blur $color #{$inset};
-  box-shadow:$top $left $blur $color #{$inset};
+     -moz-box-shadow:$top $left $blur $color #{$inset};
+      -ms-box-shadow:$top $left $blur $color #{$inset};
+          box-shadow:$top $left $blur $color #{$inset};
 }
 
 @mixin border-radius($radius) {
@@ -11,10 +12,30 @@
           border-radius: $radius;
 }
 
+@mixin translate($x, $y) {
+  -webkit-transform: translate($x,$y);
+     -moz-transform: translate($x,$y);
+      -ms-transform: translate($x,$y);
+          transform: translate($x,$y);
+}
+
 body{
   background-color: #c1c1c1;
   font-family: 'microsoft yahei',Arial,sans-serif;
 }
+
+
+.login-form{
+  padding: 50px;
+  @include box-shadow(1px, 1px, 1px, rgba(0, 0, 0, 0.175));
+  background: #fff;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+    @include translate(-50%, 0%);
+
+}
+
 .message-list{
   border-top: 3px solid #337ab7;
   @include box-shadow(1px, 1px, 1px, rgba(0, 0, 0, 0.175));

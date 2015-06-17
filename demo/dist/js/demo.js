@@ -1,71 +1,111 @@
 (function() {
-  var info, process, search;
+  var Chat;
 
-  info = {
-    chanel: "/foo",
-    username: "fushang318"
+  jQuery.string_strip = function(str) {
+    if (str === void 0) {
+      return '';
+    }
+    return str.replace(/(^\s*)|(\s*$)/g, '');
   };
 
-  search = window.location.search;
+  jQuery.string_blank = function(str) {
+    str = jQuery.string_strip(str);
+    return str.length === 0;
+  };
 
-  jQuery.each(search.replace("?", "").split("&"), function(i, str) {
-    var arr, key, value;
-    arr = str.split("=");
-    key = arr[0];
-    value = arr[1];
-    if (key === "username") {
-      info.username = value;
+  Chat = (function() {
+    function Chat(username1, chanel1) {
+      this.username = username1;
+      this.chanel = chanel1;
+      this.chanel = "/" + (encodeURI(this.chanel));
+      this.client = new Faye.Client('http://faye.4ye.me:9527/faye');
+      this.client.subscribe(this.chanel, (function(_this) {
+        return function(data) {
+          return _this.add_message_to_list(data);
+        };
+      })(this));
+      this._init_event();
     }
-    if (key === "chanel") {
-      return info.chanel = "/" + value;
-    }
-  });
 
-  process = {
-    client: new Faye.Client('http://faye.4ye.me:9527/faye'),
-    send_message: function() {
+    Chat.prototype.send_message = function() {
       var message, pub;
       message = jQuery("input[name='message']").val();
-      message = message.replace(/(^\s*)|(\s*$)/g, '');
-      if (message === void 0 || message.length === 0) {
+      message = jQuery.string_strip(message);
+      if (message.length === 0) {
         return;
       }
-      pub = process.client.publish(info.chanel, {
+      pub = this.client.publish(this.chanel, {
         text: message,
-        username: info.username
+        username: this.username
       });
       jQuery("input[name='message']").val("");
       return pub.then(null, function() {
-        return alert('There was a problem: ' + error.message);
+        return alert('信息发送失败');
       });
-    },
-    add_message_to_list: function(data) {
+    };
+
+    Chat.prototype.add_message_to_list = function(data) {
       var $li, $list, text, username;
       username = data.username;
       text = data.text;
       $list = jQuery(".message-list ul");
-      if (username === info.username) {
+      if (username === this.username) {
         $li = jQuery("<li class='clearfix self'> <div class='username'>" + username + "</div> <div class='message'>" + text + "</div> </li>");
       } else {
         $li = jQuery("<li class='clearfix other'> <div class='username'>" + username + "</div> <div class='message'>" + text + "</div> </li>");
       }
       $list.append($li);
       return jQuery(".message-list ul").scrollTop(jQuery(".message-list ul")[0].scrollHeight);
-    }
-  };
+    };
 
-  process.client.subscribe(info.chanel, function(data) {
-    return process.add_message_to_list(data);
-  });
+    Chat.prototype._init_event = function() {
+      jQuery("input[name='message']").on('keydown', (function(_this) {
+        return function(evt) {
+          if (evt.keyCode === 13) {
+            return _this.send_message();
+          }
+        };
+      })(this));
+      return jQuery("button.send").on('click', (function(_this) {
+        return function() {
+          return _this.send_message();
+        };
+      })(this));
+    };
+
+    Chat.prototype.login = function() {
+      jQuery('.login-panel').addClass('hidden');
+      return jQuery('.chat-panel').removeClass('hidden');
+    };
+
+    return Chat;
+
+  })();
 
   jQuery(function() {
-    jQuery("input[name='message']").on('keydown', function(evt) {
-      if (evt.keyCode === 13) {
-        return process.send_message();
+    return jQuery(".login-panel button.login").on('click', function(evt) {
+      var $chanel_ele, $username_ele, chanel, chat, username;
+      evt.preventDefault();
+      $username_ele = jQuery(".login-panel input[name='username']");
+      username = jQuery.string_strip($username_ele.val());
+      $chanel_ele = jQuery(".login-panel input[name='chanel']");
+      chanel = jQuery.string_strip($chanel_ele.val());
+      $username_ele.closest(".form-group").removeClass('has-error');
+      $username_ele.closest(".form-group").find("label").text("");
+      $chanel_ele.closest(".form-group").removeClass('has-error');
+      $chanel_ele.closest(".form-group").find("label").text("");
+      if (jQuery.string_blank(username)) {
+        $username_ele.closest(".form-group").addClass('has-error');
+        $username_ele.closest(".form-group").find("label").text("请输入昵称");
+        return;
       }
-    });
-    return jQuery("button.send").on('click', function() {
-      return process.send_message();
+      if (jQuery.string_blank(chanel)) {
+        $chanel_ele.closest(".form-group").addClass('has-error');
+        $chanel_ele.closest(".form-group").find("label").text("请输入频道名");
+        return;
+      }
+      chat = new Chat(username, chanel);
+      return chat.login();
     });
   });
 

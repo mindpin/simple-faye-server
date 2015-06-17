@@ -18,7 +18,23 @@
     %script{:src => "./js/demo.js"}
 
   %body
-    .container
+    .container.login-panel
+      .row
+        .col-md-2.login-form
+          .form-horizontal
+            .form-group
+              .col-md-12
+                %label.control-label
+                %input.form-control{:name => "username", :type => "text", :placeholder => "昵称"}
+            .form-group
+              .col-md-12
+                %label.control-label
+                %input.form-control{:name => "chanel", :type => "text", :placeholder => "频道名"}
+            .form-group
+              .col-md-3
+                %button.login.btn.btn-primary{:type => "submit"} 登陆
+
+    .container.chat-panel.hidden
       .row
         .col-md-10.col-md-offset-1
           .message-list
